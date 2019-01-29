@@ -37,7 +37,7 @@ class Die implements DieInterface {
     (this.div as HTMLElement).style.textAlign = "center";
     (this.div as HTMLElement).style.verticalAlign = "middle";
     (this.div as HTMLElement).style.fontSize = "1.5em";
-    (this.div as HTMLElement).style.textDecoration = "bold";
+    (this.div as HTMLElement).style.fontWeight = "bold";
   }
 
   append: Function = (target: Element): boolean => {

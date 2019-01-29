@@ -50,7 +50,7 @@ var Die = /** @class */ (function () {
         this.div.style.textAlign = "center";
         this.div.style.verticalAlign = "middle";
         this.div.style.fontSize = "1.5em";
-        this.div.style.textDecoration = "bold";
+        this.div.style.fontWeight = "bold";
     }
     Die.DieValue = DieValue;
     return Die;
