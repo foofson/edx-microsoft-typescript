@@ -1,6 +1,9 @@
 "use strict";
 
 import * as _ from 'lodash';
+import * as Chance from 'chance';
+
+var chance = new Chance();
 
 enum DieValue {
   None,
@@ -60,15 +63,9 @@ class DieRoller extends Die {
   }
 
   roll: Function = (): boolean => {
-    this.setValue(getRandomIntInclusive(1, 6));
+    this.setValue(chance.d6());
     return true;
   };
-}
-
-let getRandomIntInclusive: Function = (min: number, max: number) => {
-  min = _.ceil(min);
-  max = _.floor(max);
-  return _.random(min, max);
 }
 
 export default DieRoller;

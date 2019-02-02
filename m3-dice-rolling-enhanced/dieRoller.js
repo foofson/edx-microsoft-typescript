@@ -13,7 +13,8 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 exports.__esModule = true;
-var _ = require("lodash");
+var Chance = require("chance");
+var chance = new Chance();
 var DieValue;
 (function (DieValue) {
     DieValue[DieValue["None"] = 0] = "None";
@@ -62,16 +63,11 @@ var DieRoller = /** @class */ (function (_super) {
     function DieRoller(div, length, width, border, color) {
         var _this = _super.call(this, div, length, width, border, color) || this;
         _this.roll = function () {
-            _this.setValue(getRandomIntInclusive(1, 6));
+            _this.setValue(chance.d6());
             return true;
         };
         return _this;
     }
     return DieRoller;
 }(Die));
-var getRandomIntInclusive = function (min, max) {
-    min = _.ceil(min);
-    max = _.floor(max);
-    return _.random(min, max);
-};
 exports["default"] = DieRoller;
