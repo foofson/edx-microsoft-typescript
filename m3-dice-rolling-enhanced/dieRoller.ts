@@ -69,39 +69,4 @@ let getRandomIntInclusive: Function = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-let diceTable: Element = document.createElement('div');
-(diceTable as HTMLElement).style.display = "table";
-(diceTable as HTMLElement).style.borderSpacing = "15px";
-document.body.appendChild(diceTable);
-
-function createDice(size: number, border: number, color: string): Array<DieRoller> {
-  let dice: Array<DieRoller> = [];
-  for (let i: number = 0; i < 4; i++) {
-    let div: Element = document.createElement('div');
-    let die: DieRoller = new DieRoller(div, size, size, border, color);
-    die.append(diceTable);
-    dice.push(die);
-  }
-  return dice;
-}
-
-let dieSize: number = 100;
-let dieBorder: number = 5;
-let dieColor: string = "orange";
-
-let dice: Array<DieRoller> = createDice(dieSize, dieBorder, dieColor);
-
-let buttonCell: Element = document.createElement('div');
-(buttonCell as HTMLElement).style.display = "table-cell";
-(buttonCell as HTMLElement).style.verticalAlign = "middle";
-diceTable.appendChild(buttonCell);
-
-let rollButton: Element = document.createElement('button');
-rollButton.textContent = "Roll the dice";
-(rollButton as HTMLElement).onclick = () => {
-  dice.forEach((die) => {
-    die.roll();
-  });
-};
-(rollButton as HTMLElement).style.fontSize = "1.25em";
-buttonCell.appendChild(rollButton);
+export default DieRoller;
