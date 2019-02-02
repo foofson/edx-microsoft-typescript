@@ -1,13 +1,14 @@
-import DieRoller from './dieRoller.js'
+import DieRoller from './dieRoller.js';
+import * as _ from 'lodash';
 
 function createDice(size: number, border: number, color: string): Array<DieRoller> {
   let dice: Array<DieRoller> = [];
-  for (let i: number = 0; i < 4; i++) {
+  _.forEach(_.range(0, 4), () => {
     let div: Element = document.createElement('div');
     let die: DieRoller = new DieRoller(div, size, size, border, color);
     die.append(diceTable);
     dice.push(die);
-  }
+  });
   return dice;
 }
 
@@ -32,7 +33,7 @@ diceTable.appendChild(buttonCell);
 let rollButton: Element = document.createElement('button');
 rollButton.textContent = 'Roll the dice';
 (rollButton as HTMLElement).onclick = () => {
-  dice.forEach((die) => {
+  _.forEach(dice, (die) => {
     die.roll();
   });
 };

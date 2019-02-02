@@ -9,6 +9,8 @@
   "author": "Maciej Perdenia",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.4"
+    "@types/lodash": "^4.14.120",
+    "express": "^4.16.4",
+    "lodash": "^4.17.11"
   }
 }

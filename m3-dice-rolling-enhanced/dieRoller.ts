@@ -1,5 +1,7 @@
 "use strict";
 
+import * as _ from 'lodash';
+
 enum DieValue {
   None,
   One,
@@ -64,9 +66,9 @@ class DieRoller extends Die {
 }
 
 let getRandomIntInclusive: Function = (min: number, max: number) => {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+  min = _.ceil(min);
+  max = _.floor(max);
+  return _.random(min, max);
 }
 
 export default DieRoller;

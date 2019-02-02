@@ -13,6 +13,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 exports.__esModule = true;
+var _ = require("lodash");
 var DieValue;
 (function (DieValue) {
     DieValue[DieValue["None"] = 0] = "None";
@@ -69,8 +70,8 @@ var DieRoller = /** @class */ (function (_super) {
     return DieRoller;
 }(Die));
 var getRandomIntInclusive = function (min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+    min = _.ceil(min);
+    max = _.floor(max);
+    return _.random(min, max);
 };
 exports["default"] = DieRoller;

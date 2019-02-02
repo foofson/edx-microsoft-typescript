@@ -1,14 +1,15 @@
 "use strict";
 exports.__esModule = true;
 var dieRoller_js_1 = require("./dieRoller.js");
+var _ = require("lodash");
 function createDice(size, border, color) {
     var dice = [];
-    for (var i = 0; i < 4; i++) {
+    _.forEach(_.range(0, 4), function () {
         var div = document.createElement('div');
         var die = new dieRoller_js_1["default"](div, size, size, border, color);
         die.append(diceTable);
         dice.push(die);
-    }
+    });
     return dice;
 }
 var DieStyling;
@@ -29,7 +30,7 @@ diceTable.appendChild(buttonCell);
 var rollButton = document.createElement('button');
 rollButton.textContent = 'Roll the dice';
 rollButton.onclick = function () {
-    dice.forEach(function (die) {
+    _.forEach(dice, function (die) {
         die.roll();
     });
 };
