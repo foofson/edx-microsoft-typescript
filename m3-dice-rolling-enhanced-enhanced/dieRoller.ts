@@ -24,8 +24,13 @@ interface DieInterface {
 }
 
 class Roller {
-  roll (callback: (value: number) => boolean): void {
-    callback(chance.d6());
+  roll (callback?: (value: number) => boolean): void | number {
+    const rolled = chance.d6();
+    if (callback) {
+      callback(rolled);
+    } else {
+      return rolled;
+    }
   }
 }
 
@@ -67,7 +72,7 @@ class DieRoller extends Die implements Roller {
   constructor(div: Element, length: number, width: number, border: number, color: string) {
     super(div, length, width, border, color);
   }
-  roll: (callback:(value: number) => boolean) => void;
+  roll: (callback?: (value: number) => boolean) => void | number;
 }
 
 function applyMixins(derivedClass: any, baseClasses: any[]) {
