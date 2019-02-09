@@ -24,7 +24,7 @@ interface DieInterface {
 }
 
 class Roller {
-  roll = (callback: (value: number) => boolean): void => {
+  roll (callback: (value: number) => boolean): void {
     callback(chance.d6());
   }
 }
