@@ -33,8 +33,8 @@ diceTable.appendChild(buttonCell);
 let rollButton: Element = document.createElement('button');
 rollButton.textContent = 'Roll the dice';
 (rollButton as HTMLElement).onclick = () => {
-  _.forEach(dice, (die) => {
-    const rolled = die.roll();
+  _.forEach(dice, async (die) => {
+    const rolled = await die.roll();
     if (typeof rolled === 'number') {
       die.setValue(rolled);
     }

@@ -24,14 +24,23 @@ interface DieInterface {
 }
 
 class Roller {
-  roll (callback?: (value: number) => boolean): void | number {
-    const rolled = chance.d6();
+  async roll (callback?: (value: number) => boolean): Promise<any> {
+    const rolled = await callAnuApiAsync();
     if (callback) {
       callback(rolled);
     } else {
       return rolled;
     }
   }
+  
+  // roll (callback?: (value: number) => boolean): void | number {
+  //   const rolled = chance.d6();
+  //   if (callback) {
+  //     callback(rolled);
+  //   } else {
+  //     return rolled;
+  //   }
+  // }
 }
 
 class Die implements DieInterface {
@@ -72,7 +81,8 @@ class DieRoller extends Die implements Roller {
   constructor(div: Element, length: number, width: number, border: number, color: string) {
     super(div, length, width, border, color);
   }
-  roll: (callback?: (value: number) => boolean) => void | number;
+  roll: (callback?: (value: number) => boolean) => Promise<any>;
+  // roll: (callback?: (value: number) => boolean) => void | number;
 }
 
 function applyMixins(derivedClass: any, baseClasses: any[]) {
@@ -81,6 +91,13 @@ function applyMixins(derivedClass: any, baseClasses: any[]) {
       derivedClass.prototype[name] = baseClass.prototype[name];
     });
   });
+}
+
+async function callAnuApiAsync() {
+  const apiReturn = await fetch('https://qrng.anu.edu.au/API/jsonI.php?length=1&type=uint8');
+  const apiJson = await apiReturn.json();
+  const result = apiJson.data[0] % 6 + 1;
+  return result;
 }
 
 applyMixins(DieRoller, [Roller]);
