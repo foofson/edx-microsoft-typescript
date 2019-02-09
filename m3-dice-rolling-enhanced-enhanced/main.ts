@@ -34,7 +34,7 @@ let rollButton: Element = document.createElement('button');
 rollButton.textContent = 'Roll the dice';
 (rollButton as HTMLElement).onclick = () => {
   _.forEach(dice, (die) => {
-    die.roll();
+    die.roll(die.setValue);
   });
 };
 (rollButton as HTMLElement).style.fontSize = '1.25em';

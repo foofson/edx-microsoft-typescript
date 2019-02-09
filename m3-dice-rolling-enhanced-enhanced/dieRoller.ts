@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 import * as _ from 'lodash';
 import * as Chance from 'chance';
@@ -23,6 +23,12 @@ interface DieInterface {
   color: string;
 }
 
+class Roller {
+  roll = (callback: (value: number) => boolean): void => {
+    callback(chance.d6());
+  }
+}
+
 class Die implements DieInterface {
   static DieValue = DieValue;
 
@@ -45,27 +51,33 @@ class Die implements DieInterface {
     (this.div as HTMLElement).style.fontWeight = "bold";
   }
 
-  append: Function = (target: Element): boolean => {
+  append = (target: Element): boolean => {
     (target as HTMLElement).appendChild(this.div);
     return true;
   };
 
-  setValue: Function = (value: number): boolean => {
+  setValue = (value: number): boolean => {
     this.value = (value as DieValue);
     (this.div as HTMLElement).innerText = DieValue[value];
     return true;
   };
 }
 
-class DieRoller extends Die {
+class DieRoller extends Die implements Roller {
   constructor(div: Element, length: number, width: number, border: number, color: string) {
     super(div, length, width, border, color);
   }
-
-  roll: Function = (): boolean => {
-    this.setValue(chance.d6());
-    return true;
-  };
+  roll: (callback:(value: number) => boolean) => void;
 }
+
+function applyMixins(derivedClass: any, baseClasses: any[]) {
+  baseClasses.forEach((baseClass) => {
+    Object.getOwnPropertyNames(baseClass.prototype).forEach((name) => {
+      derivedClass.prototype[name] = baseClass.prototype[name];
+    });
+  });
+}
+
+applyMixins(DieRoller, [Roller]);
 
 export default DieRoller;
