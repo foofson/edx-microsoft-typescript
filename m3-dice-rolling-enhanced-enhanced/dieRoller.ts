@@ -42,7 +42,6 @@ class Roller {
 function anuApi() {
   return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
     descriptor.value = async function () {
-      console.log('async');
       return callAnuApiAsync();
     }
   };

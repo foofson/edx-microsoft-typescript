@@ -35,7 +35,7 @@ rollButton.textContent = 'Roll the dice';
 (rollButton as HTMLElement).onclick = () => {
   _.forEach(dice, async (die) => {
     const rolled = await die.roll();
-    console.log(rolled);
+
     if (typeof rolled === 'number') {
       die.setValue(rolled);
     }
