@@ -24,23 +24,28 @@ interface DieInterface {
 }
 
 class Roller {
-  async roll (callback?: (value: number) => boolean): Promise<any> {
-    const rolled = await callAnuApiAsync();
+  roll (callback?: (value: number) => boolean): void | number {
+  const rolled = this.getRandomValue();
     if (callback) {
       callback(rolled);
     } else {
       return rolled;
     }
+  } 
+
+  @anuApi()
+  getRandomValue() {
+    return chance.d6();
   }
-  
-  // roll (callback?: (value: number) => boolean): void | number {
-  //   const rolled = chance.d6();
-  //   if (callback) {
-  //     callback(rolled);
-  //   } else {
-  //     return rolled;
-  //   }
-  // }
+}
+
+function anuApi() {
+  return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+    descriptor.value = async function () {
+      console.log('async');
+      return callAnuApiAsync();
+    }
+  };
 }
 
 class Die implements DieInterface {
@@ -81,8 +86,8 @@ class DieRoller extends Die implements Roller {
   constructor(div: Element, length: number, width: number, border: number, color: string) {
     super(div, length, width, border, color);
   }
-  roll: (callback?: (value: number) => boolean) => Promise<any>;
-  // roll: (callback?: (value: number) => boolean) => void | number;
+  roll: (callback?: (value: number) => boolean) => void | number;
+  getRandomValue: () => number;
 }
 
 function applyMixins(derivedClass: any, baseClasses: any[]) {
